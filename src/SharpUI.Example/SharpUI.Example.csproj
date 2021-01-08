@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/jonathanpotts/SharpUI.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Company>Jonathan Potts</Company>
+    <Authors>Jonathan Potts</Authors>
+    <Copyright>Copyright © Jonathan Potts</Copyright>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\SharpUI\SharpUI.csproj" />
+  </ItemGroup>
+
+</Project>
