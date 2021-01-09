@@ -1,5 +1,6 @@
 ﻿using Android.Content;
 using Android.Graphics;
+using Android.OS;
 using Android.Text;
 using Android.Text.Style;
 using Android.Views;
@@ -29,16 +30,30 @@ namespace SharpUI.Android
             {
                 using var spannableString = new SpannableString(span.Model.Text);
 
-                // Set font family and weight
-                var typeface = TypefaceManager.Get(context, span.Model.FontFamily);
+                // Set font family and weight (only supported on Android 9 or newer)
+                if (Build.VERSION.SdkInt >= BuildVersionCodes.P)
+                {
+                    Typeface typeface = null;
 
-                if (span.Model.FontWeight != null)
-                {
-                    SetSpan(spannableString, new TypefaceSpan(Typeface.Create(typeface, (int)span.Model.FontWeight, false)));
-                }
-                else
-                {
-                    SetSpan(spannableString, new TypefaceSpan(typeface));
+                    if (span.Model.FontFamily != null)
+                    {
+                        typeface = TypefaceManager.Get(context, span.Model.FontFamily);
+                    }
+
+                    if (span.Model.FontWeight.HasValue)
+                    {
+                        if (typeface == null)
+                        {
+                            typeface = TypefaceManager.Get(context, view.Settings.FontFamily);
+                        }
+
+                        typeface = Typeface.Create(typeface, (int)span.Model.FontWeight, false);
+                    }
+
+                    if (typeface != null)
+                    {
+                        SetSpan(spannableString, new TypefaceSpan(typeface));
+                    }
                 }
 
                 // Set foreground color
@@ -88,6 +103,28 @@ namespace SharpUI.Android
 
             if (view.Settings != null)
             {
+                Typeface typeface = null;
+
+                if (view.Settings.FontFamily != null)
+                {
+                    typeface = TypefaceManager.Get(context, view.Settings.FontFamily);
+                }
+
+                if (view.Settings.FontWeight.HasValue)
+                {
+                    if (typeface == null)
+                    {
+                        typeface = TypefaceManager.Get(context, null);
+                    }
+
+                    typeface = Typeface.Create(typeface, (int)view.Settings.FontWeight, false);
+                }
+
+                if (typeface != null)
+                {
+                    textView.Typeface = typeface;
+                }
+
                 // Set max lines
                 if (view.Settings.MaxLines.HasValue)
                 {

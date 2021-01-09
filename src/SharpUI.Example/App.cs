@@ -13,8 +13,9 @@ namespace SharpUI.Example
                 new Span(" "),
                 new Span("from .NET!")
                     .ForegroundColor(Color.Navy)
+                    .Bold()
             }
-                .FontFamily(new FileFontFamily("fonts/Bangers/Bangers-Regular.ttf"))
+                .FontFamily(new FileFontFamily("Bangers_Regular.ttf"))
         };
     }
 }

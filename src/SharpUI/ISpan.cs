@@ -11,13 +11,15 @@ namespace SharpUI
         /// <summary>
         /// Sets the font family for text in this view.
         /// </summary>
+        /// <remarks>Does nothing on Android 8.1 or older.</remarks>
         /// <param name="fontFamily">Font family to use. If null, then the default font family is used.</param>
-        /// <returns></returns>
+        /// <returns>Updated view.</returns>
         T FontFamily(FontFamily fontFamily);
 
         /// <summary>
         /// Sets the font weight for text in this view.
         /// </summary>
+        /// <remarks>Does nothing on Android 8.1 or older.</remarks>
         /// <param name="weight">Font weight to use. If null, then the default font weight is used.</param>
         /// <returns>Updated view.</returns>
         T FontWeight(FontWeight? weight);

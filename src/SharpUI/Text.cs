@@ -14,6 +14,16 @@ namespace SharpUI
         public class Model
         {
             /// <summary>
+            /// Default font family.
+            /// </summary>
+            public FontFamily FontFamily { get; set; }
+
+            /// <summary>
+            /// Default font weight.
+            /// </summary>
+            public FontWeight? FontWeight { get; set; }
+
+            /// <summary>
             /// Maximum number of lines to display (no limit if null).
             /// </summary>
             public int? MaxLines { get; set; }
@@ -26,12 +36,12 @@ namespace SharpUI
             /// <summary>
             /// Alignment of text.
             /// </summary>
-            public TextAlignment TextAlignment { get; set; }
+            public TextAlignment TextAlignment { get; set; } = TextAlignment.TextStart;
 
             /// <summary>
             /// Determines if right-to-left layout direction is used.
             /// </summary>
-            public bool RtlLayoutDirection { get; set; }
+            public bool RtlLayoutDirection { get; set; } = false;
         }
 
         /// <summary>
@@ -60,14 +70,24 @@ namespace SharpUI
 
         public Text FontFamily(FontFamily fontFamily)
         {
-            ForEach<Span>(span => span.FontFamily(fontFamily));
+            if (Settings == null)
+            {
+                Settings = new Model();
+            }
+
+            Settings.FontFamily = fontFamily;
 
             return this;
         }
 
         public Text FontWeight(FontWeight? weight)
         {
-            ForEach<Span>(span => span.FontWeight(weight));
+            if (Settings == null)
+            {
+                Settings = new Model();
+            }
+
+            Settings.FontWeight = weight;
 
             return this;
         }
